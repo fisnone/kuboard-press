@@ -11,7 +11,7 @@ meta:
 
 <AdSenseTitle/>
 
-参考文档： Kubernetes 官网 [Managing Compute Resources for Containers](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)
+参考文档： Kubernetes  [Managing Compute Resources for Containers](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)
 
 ## 概述
 
@@ -48,7 +48,7 @@ Kubernetes 中，可以为容器指定计算资源的请求数量 request 和限
 
 在 Kuboard 的工作负载编辑器中编辑容器资源请求及限制的界面如下图所示：
 
-![Kubernetes教程：管理容器的计算资源](./computing-resource.assets/image-20190908193257183.png)
+![Kubernetes教程：管理容器的计算资源](./computing-resource.assets/image-20210404214836049.png)
 
 ## 带有资源请求的容器组是如何调度的
 

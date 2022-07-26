@@ -19,7 +19,8 @@ Kuboard 日志界面和终端界面都使用了 websocket 与服务器端通信�
 * 您当前使用的浏览器不支持 WebSocket，推荐使用最新版本的 chrome 浏览器，也可以尝试最新版本的 firefox
 
 如果您还有问题，请尝试：
-* 清空浏览器缓存，重新登录 Kuboard
+* （如果刚完成 Kuboard 的升级）退出 Kuboard 登录，重新输入 token 登录 Kuboard
+* 清空浏览器缓存
 
 ## 第二步
 
@@ -31,7 +32,7 @@ Kuboard 日志界面和终端界面都使用了 websocket 与服务器端通信�
   * 您通过 VPN 接入到服务器所在的网络，然后访问 Kuboard 的节点端口 32567
   * 您的网络运营商（如长城宽带、小区宽带、电力猫等）为了节省出口带宽，对所有的 HTTP 服务都做了代理和缓存
 
-此时，您可以尝试使用 kubectl port-forward 的方式来访问 Kuboard。具体步骤如下：
+此时，您可以为 Kuboard 启用 https （请在方向代理上配置 https）；或者，您可以尝试使用 kubectl port-forward 的方式来访问 Kuboard。具体步骤如下：
 
 * 请参考 [在客户端电脑安装 kubectl](/install/install-kubectl.html)
 * 在客户端电脑上执行端口转发命令，此命令将监听您客户端机器的 8000 端口，并将请求转发到 kuboard 所在 Pod 的 80 端口
@@ -56,13 +57,13 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    k8s.eip.work/displayName: kuboard
-    k8s.eip.work/workload: kuboard
+    k8s.kuboard.cn/displayName: kuboard
+    k8s.kuboard.cn/workload: kuboard
     nginx.com/sticky-cookie-services: serviceName=kuboard srv_id expires=1h path=/
     nginx.org/websocket-services: kuboard
   labels:
-    k8s.eip.work/layer: monitor
-    k8s.eip.work/name: kuboard
+    k8s.kuboard.cn/layer: monitor
+    k8s.kuboard.cn/name: kuboard
   name: kuboard
   namespace: kube-system
 spec:
@@ -89,6 +90,10 @@ server {
     proxy_pass  http://192.168.2.39:32567;  # 替换成你的节点地址
     proxy_http_version 1.1;
     proxy_pass_header Authorization;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    # proxy_set_header X-Forwarded-Proto https; # 如果您在反向代理上启用了 HTTPS
   }
   location /k8s-ws/ {
     proxy_pass  http://192.168.2.39:32567;  # 替换成你的节点地址
@@ -96,6 +101,10 @@ server {
     proxy_pass_header Authorization;
     proxy_set_header Upgrade "websocket";
     proxy_set_header Connection "upgrade";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    # proxy_set_header X-Forwarded-Proto https; # 如果您在反向代理上启用了 HTTPS
   }
   gzip on;
 }

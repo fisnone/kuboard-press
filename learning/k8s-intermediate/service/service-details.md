@@ -11,7 +11,7 @@ meta:
 
 <AdSenseTitle/>
 
-参考文档：Kubernetes 官网文档：[Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+参考文档：Kubernetes 文档：[Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 
 ## 创建 Service
 
@@ -262,7 +262,7 @@ kubelet 查找有效的 Service，并针对每一个 Service，向其所在节�
 
 例如，Service `redis-master` 暴露 TCP 端口 6379，其 Cluster IP 为 10.0.0.11，对应的环境变量如下所示：
 
-``` s
+```
 REDIS_MASTER_SERVICE_HOST=10.0.0.11
 REDIS_MASTER_SERVICE_PORT=6379
 REDIS_MASTER_PORT=tcp://10.0.0.11:6379

@@ -11,7 +11,7 @@ meta:
 
 <AdSenseTitle/>
 
-参考文档： Kubernetes 官网文档 [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)
+参考文档： Kubernetes 文档 [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)
 
 ## 数据卷概述
 
@@ -60,7 +60,9 @@ Docker 里同样也存在一个 volume（数据卷）的概念，但是 docker �
 
 :::
 
-![Kubernetes教程：数据卷Volume-概念结构](./volume.assets/image-20190904194501941.png)
+
+
+![Kubernetes教程：数据卷Volume-概念结构](./volume.assets/image-20210404180050704.png)
 
 ## 数据卷的类型
 

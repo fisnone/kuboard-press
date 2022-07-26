@@ -263,7 +263,7 @@ kubectl delete node demo-worker-x-x
 
 > Ingress官方文档：https://kubernetes.io/docs/concepts/services-networking/ingress/
 >
-> Ingress Controllers官网介绍：https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+> Ingress Controllers介绍：https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
 >
 > 本文中使用如下部署方式：https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#using-a-self-provisioned-edge
 >
@@ -318,12 +318,10 @@ kubectl apply -f https://kuboard.cn/install-script/v1.15.2/nginx-ingress.yaml
 
 您已经完成了 Kubernetes 集群的安装，下一步请：
 
-[安装 Kuboard](/install/install-dashboard.html)
+[安装 Kuboard](/install/v3/install.html)
 
 安装 Kuboard 之前先
-  <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
-    在线体验 Kuboard
-  </a>
+  <KuboardDemo suffix="install" label="在线体验 Kuboard" color="#007af5"/>
 
 ::: tip
 * Kubernetes 初学者，[点击这里获取 Kubernetes 学习路径](/overview/#kubernetes-%E5%88%9D%E5%AD%A6%E8%80%85)

@@ -33,7 +33,7 @@ Kubernetes 对 Pod 进行调度时，以当时集群中各节点的可用资源�
 
 * 执行以下命令安装 nfs 服务器所需的软件包
   ``` sh
-  yum install -y nfs-utils
+  yum install -y rpcbind nfs-utils
   ```
 * 执行命令 `vim /etc/exports`，创建 exports 文件，文件内容如下：
   ```
@@ -61,7 +61,8 @@ Kubernetes 对 Pod 进行调度时，以当时集群中各节点的可用资源�
 ## 在客户端测试nfs
 
 ::: tip
-本章节中所有命令都以 root 身份执行
+* 本章节中所有命令都以 root 身份执行
+* 服务器端防火墙开放111、662、875、892、2049的 tcp / udp 允许，否则远端客户无法连接。
 :::
 
 * 执行以下命令安装 nfs 客户端所需的软件包
@@ -102,10 +103,10 @@ Kubernetes 对 Pod 进行调度时，以当时集群中各节点的可用资源�
   | NFS Server | 172.17.216.82  | 请使用您自己的NFS服务的IP地址     |
   | NFS Path   | /root/nfs_root | 请使用您自己的NFS服务所共享的路径 |
   
-  ![Kubernetes教程_在Kuboard中创建NFS_StorageClass存储类](./nfs.assets/image-20191003183534076.png)
+  ![Kubernetes教程_在Kuboard中创建NFS_StorageClass存储类](./nfs.assets/image-20210404194644944.png)
 
 * 在场景中使用存储类
   
-  此时您可以在自己的场景中使用刚创建的存储类。Kuboard官网上，有以下几个地方可以用到NFS存储类：
+  此时您可以在自己的场景中使用刚创建的存储类。Kuboard上，有以下几个地方可以用到NFS存储类：
   * [导入 example 微服务](/guide/example/import.html)
   * [安装监控套件](/guide/example/monitor.html#安装监控套件)

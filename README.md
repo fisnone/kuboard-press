@@ -1,133 +1,115 @@
 ---
 layout: SpecialHomePage
+description: Kubernetes教程_本文简要介绍了Kuboard
 ---
 
-# Kuboard简介
+# Kuboard for Kubernetes
 
-Kuboard 是一款基于 Kubernetes 的微服务管理界面。目的是帮助用户快速在 Kubernetes 上落地微服务。在 [https://kuboard.cn](https://kuboard.cn) 上，您可以获得：
-* 最新版本的 Kubernetes 安装文档
-* 免费的 Kubernetes 中文教程
-* 免费的 Kubernetes 图形化管理界面 Kuboard
-* 在 Kubernetes 上部署 Spring Cloud 的实战分享
+Kuboard 是一款专为 Kubernetes 设计的免费管理界面，兼容 Kubernetes 版本 1.13 及以上。Kuboard 每周发布一个 beta 版本，最长每月发布一个正式版本，经过两年的不断迭代和优化，已经具备多集群管理、权限管理、监控套件、日志套件等丰富的功能，并且有 1000+ 的企业将 Kuboard 应用于其生产环境。Kuboard 自 2019年8月发布第一个版本以来，得到了众多用户的认可，目前已经获得了 10000+ GitHub Star
+
+<StarCount></StarCount>
+<StarCountDockerPulls></StarCountDockerPulls>
+
+<p>
+
+<img src="https://addons.kuboard.cn/downloads/kuboard-press.svg" style="height: 320px; width: 540px;"/>
+
+</p>
+
+点击这里可以查看 [Kuboard 的安装文档](https://kuboard.cn/install/v3/install.html)
+
+## 在线演示
+
+<div>
+  在线演示环境中，您具备 <span style="color: red; font-weight: bold">只读</span> 权限，只能体验 Kuboard 的一部分功能。<br/>
+</div>
+<div style="padding: 10px; border: 1px solid #eee; border-radius: 10px; margin: 10px 0px; background-color: #fafafa;">
+  <a href="https://demo.kuboard.cn" target="_blank">https://demo.kuboard.cn</a> <br/>
+  <div style="width: 60px; display: inline-block; margin-top: 5px;">用&nbsp;户</div>
+  demo <br/>
+  <div style="width: 60px; display: inline-block;">密&nbsp;码</div>
+  demo123
+</div>
+
+## 特点介绍
+
+相较于 Kubernetes Dashboard 等其他 Kubernetes 管理界面，Kuboard 的主要特点有：
+
+* 多种认证方式
+
+  Kuboard 可以使用内建用户库、gitlab / github 单点登录或者 LDAP 用户库进行认证，避免管理员将 ServiceAccount 的 Token 分发给普通用户而造成的麻烦。使用内建用户库时，管理员可以配置用户的密码策略、密码过期时间等安全设置。
+
+  ![Kuboard登录界面](./intro.assets/image-20210405162940278.png)
+
+* 多集群管理
+
+  管理员可以将多个 Kubernetes 集群导入到 Kuboard 中，并且通过权限控制，将不同集群/名称空间的权限分配给指定的用户或用户组。
+
+  ![Kuboard集群列表页](./intro.assets/image-20210405164029151.png)
+
+* 微服务分层展示
+
+  在 Kuboard 的名称空间概要页中，以经典的微服务分层方式将工作负载划分到不同的分层，更加直观地展示微服务架构的结构，并且可以为每一个名称空间自定义名称空间布局。
+
+  ![Kuboard-微服务分层](./intro.assets/image-20210405164532452.png)
+
+* 工作负载的直观展示
+
+  Kuboard 中将 Deployment 的历史版本、所属的 Pod 列表、Pod 的关联事件、容器信息合理地组织在同一个页面中，可以帮助用户最快速的诊断问题和执行各种相关操作。
+
+  ![Kuboard-工作负载详情](./intro.assets/image-20210405180147614.png)
+
+* 工作负载编辑
+
+  Kuboard 提供了图形化的工作负载编辑界面，用户无需陷入繁琐的 YAML 文件细节中，即可轻松完成对容器的编排任务。支持的 Kubernetes 对象类型包括：Node、Namespace、Deployment、StatefulSet、DaemonSet、Secret、ConfigMap、Service、Ingress、StorageClass、PersistentVolumeClaim、LimitRange、ResourceQuota、ServiceAccount、Role、RoleBinding、ClusterRole、ClusterRoleBinding、CustomResourceDefinition、CustomResource 等各类常用 Kubernetes 对象，
+
+  ![Kuboard-工作负载编辑](./intro.assets/image-20210405180800712.png)
+
+* 存储类型支持
+
+  在 Kuboard 中，可以方便地对接 NFS、CephFS 等常用存储类型，并且支持对 CephFS 类型的存储卷声明执行扩容和快照操作。
+
+  ![Kuboard-存储类](./intro.assets/image-20210405181928653.png)
+
+* 丰富的互操作性
+
+  可以提供许多通常只在 `kubectl` 命令行界面中才提供的互操作手段，例如：
+
+  * Top Nodes / Top Pods
+  * 容器的日志、终端
+  * 容器的文件浏览器（支持从容器中下载文件、上传文件到容器）
+  * KuboardProxy（在浏览器中就可以提供 `kubectl proxy` 的功能）
+
+  ![Kuboard-文件浏览器](./intro.assets/image-20210405182805543.png)
+
+* 套件扩展
+
+  Kuboard 提供了必要的套件库，使得用户可以根据自己的需要扩展集群的管理能力。当前提供的套件有：
+
+  * 资源层监控套件，基于 Prometheus / Grafana 提供 K8S 集群的监控能力，可以监控集群、节点、工作负载、容器组等各个级别对象的 CPU、内存、网络、磁盘等资源的使用情况；
+  * 日志聚合套件，基于 Grafana / Loki / Promtail 实现日志聚合；
+  * 存储卷浏览器，查看和操作存储卷中的内容；
+
+  ![Kuboard-套件扩展](./intro.assets/image-20210405183652378.png)
+
+* 告警配置
+  
+  可以通过界面直接配置资源层监控套件发送告警消息：
+
+  * 支持邮件、微信发送告警消息；
+  * 支持告警路由配置；
+  * 支持告警规则配置等；
+
+  ![Kuboard-告警配置](./intro.assets/alert-config.png)
 
 
+* 操作审计
 
-## Kubernetes安装文档
+  Kuboard 支持操作审计的功能：
 
-* <a href="https://kuboard.cn/install/install-k8s.html">Kubernetes (K8S)v1.16.2 安装文档</a>
-  * 每天超过 300 名网友参考此文档完成Kubernetes安装
-  * QQ群在线答疑
-* <a href="https://kuboard.cn/install/install-kubernetes.html">Kubernetes 高可用安装文档</a>
-* <a href="https://kuboard.cn/install/upgrade-k8s/1.15.x-1.16.x.html">Kubernetes升级到1.16.x</a>
-* <a href="https://kuboard.cn/install/install-dashboard.html">Kuboard 安装文档</a>
+  * 审计用户通过 Kuboard 界面和 Kuboard API 执行的操作；
+  * 自定义审计规则；
 
-## Kubernetes免费教程
+  ![Kuboard-操作审计](./intro.assets/audit.png)
 
-Kubernetes教程的主要依据是：Kubernetes 官网文档，以及使用 Kuboard 落地 Spring Cloud 微服务的实战经验
-
-### **Kubernetes 介绍**
-
-  * <a href="https://kuboard.cn/learning/k8s-bg/what-is-k8s.html">什么是Kubernetes</a>
-  * <a href="https://kuboard.cn/learning/k8s-bg/component.html">Kubernetes组件</a>
-
-### Kubernetes入门
-  * <a href="https://kuboard.cn/learning/k8s-basics/kubernetes-basics.html">0. 学习Kubernetes基础知识</a> (10分钟)
-    * <a href="https://kuboard.cn/learning/k8s-basics/deploy-app.html">1. 部署一个应用程序</a> (5分钟)
-    * <a href="https://kuboard.cn/learning/k8s-basics/explore.html">2. 查看 Pods / Nodes</a> (10分钟)
-    * <a href="https://kuboard.cn/learning/k8s-basics/expose.html">3. 公布应用程序</a> (10分钟)
-    * <a href="https://kuboard.cn/learning/k8s-basics/scale.html">4. 伸缩应用程序</a> (10分钟)
-    * <a href="https://kuboard.cn/learning/k8s-basics/update.html">5. 执行滚动更新</a> (10分钟)
-  * <a href="https://kuboard.cn/learning/k8s-basics/k8s-core-concepts.html">6. 复习Kubernetes核心概念</a> (10分钟)
-
-### Kubernetes进阶
-  * 架构
-    * <a href="https://kuboard.cn/learning/k8s-bg/architecture/nodes.html">节点</a>
-    * <a href="https://kuboard.cn/learning/k8s-bg/architecture/com.html">集群内通信</a>
-    * <a href="https://kuboard.cn/learning/k8s-bg/architecture/controller.html">控制器</a>
-  * 操作Kubernetes
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/k8s-object.html">什么是Kubernetes对象</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/manage.html">管理Kubernetes对象</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/names.html">名称</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/namespaces.html">名称空间</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/namespace-op.html">使用名称空间共享集群</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/labels.html">标签和选择器</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/annotations.html">注解</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/obj/field.html">字段选择器</a>
-  * 容器
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/container/images.html">容器镜像</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/container/env.html">容器的环境变量</a>
-  * 工作负载
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/pod.html">容器组 - 概述</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/pod-lifecycle.html">容器组 - 生命周期</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/init-container.html">容器组 - 初始化容器</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/workload.html">控制器 - 概述</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/wl-deployment/">控制器 - Deployment</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/wl-statefulset/">控制器 - StatefulSet</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/wl-daemonset/">控制器 - DaemonSet</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/wl-job/">控制器 - Job</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/workload/wl-cronjob/">控制器 - CronJob</a> 
-  * 服务发现、负载均衡、网络
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/service/service.html">Service</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/service/service-details.html">Service 详细描述</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/service/service-types.html">Service 类型</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/service/dns.html">Service/Pod 的 DNS</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/service/host-alias.html">配置Pod的 /etc/hosts</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/service/connecting.html">Service 连接应用程序</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/service/ingress.html">Ingress 通过互联网访问您的应用</a>
-  * 存储
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/persistent/volume.html">数据卷 Volume</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/persistent/pv.html">存储卷 PV 和存储卷声明 PVC</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/persistent/storage-class.html">存储类 StorageClass</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/persistent/nfs.html">自建 NFS 服务</a> 
-  * 配置
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/private-registry.html">使用私有 registry 中的 docker 镜像</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/config/config-map.html">使用 ConfigMap 配置您的应用程序</a>
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/config/computing-resource.html">管理容器的计算资源</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/config/assign-pod-node.html">将容器调度到指定的节点</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/config/taints-toleration/">污点和容忍 taints and toleration</a> 
-    * <a href="https://kuboard.cn/learning/k8s-intermediate/config/secrets/">Secrets</a> 
-
-### Kubernetes高级
-
-  * 问题诊断
-    * <a href="https://kuboard.cn/learning/k8s-advanced/ts/application.html">诊断应用程序</a>
-    * <a href="https://kuboard.cn/learning/k8s-advanced/ts/cluster.html">诊断集群问题</a>
-  * 日志
-    * <a href="https://kuboard.cn/learning/k8s-advanced/logs/">日志</a>
-  * 调度
-    * <a href="https://kuboard.cn/learning/k8s-advanced/schedule/">调度</a>
-    * <a href="https://kuboard.cn/learning/k8s-advanced/schedule/tuning.html">调度调优</a>
-    * <a href="https://kuboard.cn/learning/k8s-advanced/schedule/framework.html">调度框架</a>
-  * 策略
-    * <a href="https://kuboard.cn/learning/k8s-advanced/policy/lr.html">Limit Range</a>
-    * <a href="https://kuboard.cn/learning/k8s-advanced/policy/rq.html">Resource Quota</a>
-  * 安全
-  * 监控
-  * 联邦
-
-### Kubernetes实战
-
-在 Kubernetes 上部署 Spring Cloud 微服务：
-
-* <a href="https://kuboard.cn/learning/k8s-practice/spring-cloud/">概述</a>
-
-在 Kubernetes 上部署 Spring Cloud 微服务：(Open Capacity Platform)
-
-* 准备
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/prepare.html">准备OCP的构建环境和部署环境</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/build.html">构建docker镜像并推送到仓库</a>
-* 部署
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/sequence.html">部署顺序</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/eureka-server.html">在K8S上部署eureka-server</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/mysql.html">在K8S上部署mysql</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/redis.html">在K8S上部署redis</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/auth-server.html">在K8S上部署auth-server</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/user-center.html">在K8S上部署user-center</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/api-gateway.html">在K8S上部署api-gateway</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/back-center.html">在K8S上部署back-center</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/review.html">重新审视配置信息</a>
-* 多环境
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/export.html">导出部署配置</a>
-  * <a href="https://kuboard.cn/learning/k8s-practice/ocp/import.html">导入部署配置</a>
-
-Kuboard官网免费提供Kubernetes教程、K8S教程、K8S安装文档、Kubernetes+SpringCloud实战文档，学习过程中如有疑问，请加QQ群在线答疑。
+访问 Kuboard 网站 https://kuboard.cn 可以加入 Kuboard 社群，并获得帮助。

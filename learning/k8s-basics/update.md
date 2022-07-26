@@ -11,7 +11,7 @@ meta:
 
 <AdSenseTitle/>
 
-本文翻译自 Kubernetes 官网 [Performing a Rolling Update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/) ，并有所改写
+本文翻译自 Kubernetes  [Performing a Rolling Update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/) ，并有所改写
 
 ## 目标
 
@@ -23,7 +23,7 @@ meta:
 
 > Kubernetes 更新多副本的 Deployment 的版本时，会逐步的创建新版本的 Pod，逐步的停止旧版本的 Pod，以便使应用一直处于可用状态。这个过程中，Service 能够监视 Pod 的状态，将流量始终转发到可用的 Pod 上。
 
-在上一个模块中，我们学习了将应用程序 Scale Up（扩容）为多个实例，这是执行更新而不影响应用程序可用性的前提（如果只有个实例那还玩啥）。默认情况下，**Rolling Update 滚动更新** 过程中，Kubernetes 逐个使用新版本 Pod 替换旧版本 Pod（最大不可用 Pod 数为 1、最大新建 Pod 数也为 1）。这两个参数可以配置为数字或百分比。在Kubernetes 中，更新是版本化的，任何部署更新都可以恢复为以前的（稳定）版本。
+在上一个模块中，我们学习了将应用程序 Scale Up（扩容）为多个实例，这是执行更新而不影响应用程序可用性的前提（如果只有 1 个实例那还玩啥）。默认情况下，**Rolling Update 滚动更新** 过程中，Kubernetes 逐个使用新版本 Pod 替换旧版本 Pod（最大不可用 Pod 数为 1、最大新建 Pod 数也为 1）。这两个参数可以配置为数字或百分比。在Kubernetes 中，更新是版本化的，任何部署更新都可以恢复为以前的（稳定）版本。
 
 ## 滚动更新概述
 
@@ -57,7 +57,7 @@ meta:
 
 <b-card>
 <b-tabs content-class="mt-3">
-<b-tab title="使用kubectl" active>
+<b-tab title="使用kubectl">
 
 **修改 nginx-deployment.yaml 文件**
 
@@ -101,20 +101,16 @@ watch kubectl get pods -l app=nginx
 ```
 
 </b-tab>
-<b-tab title="使用Kuboard">
+<b-tab title="使用Kuboard" active>
 
-* **进入 default 名称空间**
-
-* 点击 ***调整镜像版本***
-
-  勾选展现层，并刷新，可找到 ***Nginx部署***
+* 点击左侧菜单中的 ***调整镜像版本*** 按钮
 
 * 针对 ***Nginx部署*** 点击修改
 
   填写新的 nginx 版本号： 1.8， 如下图所示：
-
-![Kubernetes教程：执行滚动更新](./update.assets/image-20190822214324429.png)
-
+  
+  ![Kubernetes教程：执行滚动更新](./update.assets/image-20210403204908592.png)
+  
 * 点击 ***变更***
 
 * 点击 ***应用***
@@ -123,7 +119,7 @@ watch kubectl get pods -l app=nginx
 
   可观察到 Kubernetes 对 ***Nginx部署*** 执行滚动更新的过程，如下图所示
 
-![Kubernetes教程：执行滚动更新-过程](./update.assets/image-20190822214503847.png)
+  ![Kubernetes教程：执行滚动更新-过程](./update.assets/image-20210403205053379.png)
 
 </b-tab>
 </b-tabs>

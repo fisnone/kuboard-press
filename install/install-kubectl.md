@@ -19,7 +19,7 @@ meta:
 
 ## 在客户端电脑安装 kubectl
 
-Kubernetes 官网文档参照 [安装 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 安装时，经常会失败，因为国内访问 google 的镜像仓库存在问题。
+Kubernetes 文档参照 [安装 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 安装时，经常会失败，因为国内访问 google 的镜像仓库存在问题。
 
 请参考下述内容，完成 kubectl 的安装
 
@@ -108,7 +108,7 @@ kubectl version
 
 ## 获取 kubectl config 文件
 
-如果您参考 [安装 Kubernetes 单Master节点](install-k8s.html) 或 [安装 Kubernetes 高可用](install-kubernetes.html) 完成了 Kubernetes 安装，**请在 demo-master-a-1 节点上执行如下命令**
+如果您参考 [离线安装高可用的Kubernetes集群](install-k8s.html) 或 [安装 Kubernetes 高可用](install-kubernetes.html) 完成了 Kubernetes 安装，**请在 demo-master-a-1 节点上执行如下命令**
 
 ```sh
 cat /etc/kubernetes/admin.conf

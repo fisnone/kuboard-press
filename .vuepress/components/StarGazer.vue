@@ -11,15 +11,14 @@
       <div style="text-align: center; font-size: 18px; weight: 500;">
         <div style="background-color: rgb(236, 245, 255); padding: 10px 10px 10px 10px; margin-bottom: 10px; border: solid 1px #007af5;">
           <a href="https://github.com/eip-work/kuboard-press" target="_blank" @click="linkToStar">
-            给一个 Github Star
+            一个 Github Star
             <OutboundLink/>
           </a>
-          就可以鼓励作者尽快完成
-          <span style="color: red; font-weight: 500;">剩下的 {{$themeConfig.incompleteRatio}}% </span>
+          激励 Kuboard 继续前行。
         </div>
         <a href="https://github.com/eip-work/kuboard-press" target="_blank" @click="linkToStar">
           <div style="border: solid 1px #ddd;">
-            <img src="./star.png" style="max-width: 100%; opacity: 0.6;">
+            <img src="./star.png" style="max-width: 100%; opacity: 0.8;">
           </div>
         </a>
       </div>
@@ -55,6 +54,10 @@ export default {
   },
   methods: {
     checkDuration() {
+      if (localStorage.getItem('stared') === 'true') {
+        console.log('已经去过 GITHUB')
+        return
+      }
       let firstAccess = localStorage.getItem('FIRST_ACCESS')
       // console.log(new Date(), new Date(firstAccess))
       if (!firstAccess) {

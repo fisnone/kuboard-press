@@ -23,7 +23,7 @@ Open Capacity Platform 是基于 Java Spring Cloud 的微服务架构，为了�
     * Kubernetes worker 节点
 * **软件**
   * Kubernetes 集群及管理软件
-    * Kubernetes 最新版本，参考 [安装Kubernetes单Master节点](/install/install-k8s.html)
+    * Kubernetes 最新版本，参考 [离线安装高可用的Kubernetes集群](/install/install-k8s.html)
     * Kuboard 最新版本，参考 [安装Kuboard](/install/install-kubernetes.html)
   * Master节点
     * Docker 已在安装 Kubernetes 时完成安装
@@ -68,7 +68,7 @@ yum install java-1.8.0-openjdk\* -y
 
 ## 在 master 节点上安装 maven
 
-* 在 [maven 官网](http://maven.apache.org/download.cgi) 获取最新版 maven 的 binary 文件下载链接，例如 apache-maven-3.6.2-bin.tar.gz 的下载地址为 `http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz`
+* 在 [maven ](http://maven.apache.org/download.cgi) 获取最新版 maven 的 binary 文件下载链接，例如 apache-maven-3.6.2-bin.tar.gz 的下载地址为 `http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz`
 
 * 以 root 身份在 master 节点上执行：
   ```sh

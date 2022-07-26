@@ -2,6 +2,8 @@ HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+.DS_Store
+
 ### STS ###
 .apt_generated
 .classpath
@@ -32,3 +34,5 @@ HELP.md
 /node_modules/
 /.vuepress/dist/
 /docs/
+
+__v3.md

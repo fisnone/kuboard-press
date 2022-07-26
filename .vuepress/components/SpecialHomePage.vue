@@ -38,9 +38,13 @@
           :item="actionLink2"
         />
       </span>
-      <p>
-        <StarCount></StarCount>
-      </p>
+      <div>
+
+        <div class="home-link noselect" style="line-height: 28px; font-size: 1em; font-weight: 400; height: 100px; padding-top: 42px;">
+          <StarCount style="margin: 0 0px 0 10px; vertical-align: bottom; height: 28px;"></StarCount>
+          <StarCountDockerPulls style="display: inline-block; vertical-align: bottom; height: 28px;" class="docker-pull-specialpage"></StarCountDockerPulls>
+        </div>
+      </div>
     </header>
 
     <div
@@ -66,25 +70,25 @@
       </div>
     </div>
 
-    <div class="intro">
+    <!-- <div class="intro">
       <b-card class="intro_text" shadow="hover">
         <p>
           <h2>Kuboard</h2>
-          <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
+          <a target="_blank" :href="`https://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
             Kuboard 在线体验
           </a>
           <li>Kubernetes 管理界面</li>
           <li>微服务参考架构</li>
           <li>无需手写 YAML</li>
-          <li><a href="/install/install-dashboard.html">安装Kuboard</a></li>
+          <li><a href="/install/v3/install.html">安装Kuboard</a></li>
         </p>
       </b-card>
       <div class="intro_picture">
-        <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
+        <a target="_blank" :href="`https://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
           <FancyImage src="/images/preview.gif" alt="Kubernetes教程_Kuboard在线体验" title="Kuboard" description="快速在 Kubernetes 上落地微服务"></FancyImage>
         </a>
       </div>
-    </div>
+    </div> -->
 
     <Content></Content>
 
@@ -105,7 +109,7 @@ export default {
     // this.$title = 'hello---'
   },
   mounted () {
-    // window.document.title = 'Kuboard 官网 - Kubernetes k8s 国内安装/部署/入门/免费中文教程/实践/微服务管理界面'
+    // window.document.title = 'Kuboard  - Kubernetes k8s 国内安装/部署/入门/免费中文教程/实践/微服务管理界面'
   },
   computed: {
     data () {
@@ -113,7 +117,7 @@ export default {
 
         home: false,
         layout: 'HomePage',
-        title: 'Kuboard官网_Kubernetes教程_K8S安装_管理界面',
+        title: 'Kuboard_Kubernetes教程_K8S安装_管理界面',
         description: 'Kuboard是一款免费的Kubernetes管理界面_同时该网站还提供Kubernetes安装文档_K8S_部署_入门_免费中文Kubernetes教程_以及在Kubernetes上部署SpringCloud的详细文档',
         meta: [
           {
@@ -123,7 +127,7 @@ export default {
         ],
         actionText: '在线体验',
         actionText2: '开始使用 →',
-        actionLink2: '/overview/',
+        actionLink2: '/install/v3/install.html',
         features:[
           {
               title: 'Kubernetes安装文档',
@@ -138,7 +142,7 @@ export default {
           {
               title: 'Kubernetes管理界面',
               details: 'Kubernetes图形化管理界面，无需编写 yaml 文件即可完成应用程序在 Kubernetes 上的部署和维护',
-              link: '/install/install-dashboard.html'
+              link: '/install/v3/install.html'
           },
           {
               title: 'Kubernetes + Spring Cloud实战',
@@ -153,7 +157,7 @@ export default {
 
     actionLink () {
       return {
-        link: `http://demo.kuboard.cn/#/dashboard?k8sToken=${this.$site.themeConfig.kuboardToken}`,
+        link: `https://demo.kuboard.cn`,
         text: this.data.actionText
       }
     },
@@ -168,6 +172,10 @@ export default {
 </script>
 
 <style lang="stylus">
+.docker-pull-specialpage
+  img
+    margin: 6px 0 !important;
+
 .home
   padding $navbarHeight 2rem 0
   max-width 960px

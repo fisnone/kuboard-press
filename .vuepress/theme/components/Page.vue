@@ -3,8 +3,8 @@
     <div class="page-nav" style="max-width: 1000px; margin-top: 56px;">
     </div>
     <div v-show="!$isSharing && !$frontmatter.lessAds" class="page-nav" style="max-width: 1000px; margin: auto;">
-      <div class="tip custom-block" style=" padding: 1rem; margin-top: 0;">
-        <div style="display: inline-block; vertical-align: top; line-height: 1.6rem;">
+      <div class="tip custom-block row" style="padding: 1rem; margin-top: 0;">
+        <div style="display: inline-block; vertical-align: top; line-height: 1.6rem;" class="col-md-8">
           <li>
             <span style="color: red; font-weight: 500;">免费</span>
             Kubernetes教程K8S教程，绝不降低品质
@@ -22,6 +22,14 @@
               <a target="_blank" href="https://time.geekbang.org/column/intro/100015201?code=MH1Wu456g0ZsrKtQI7QidivKV2hVvzerAUxDz5pOuQs%3D">深入剖析Kubernetes</a>
             </span> -->
           </li>
+        </div>
+        <div class="col-md-4">
+          <span style="font-size: 18px; font-weight: 600;">Kuboard</span>
+          <br/>
+          <span style="font-size: 14px; color: #666;">- 快速在 Kubernetes 落地微服务</span>
+          <!-- <a href="https://ke.qq.com/course/477593?flowToken=1017366" target="_blank">
+            <FancyImage src="/images/courses/kubeadm.png" title="K8S高薪培训" description="360讲师授课" alt="K8S培训_高薪培训" type="Rectangle"/>
+          </a> -->
         </div>
       </div>
     </div>
@@ -50,6 +58,7 @@
     <LazyLoad :noAdsOnSharing="true">
       <AdSenseRightSide v-show="!$isSharing"/>
     </LazyLoad>
+    <!-- <OnlineChat></OnlineChat> -->
   </main>
 </template>
 
@@ -57,9 +66,10 @@
 import PageEdit from '@theme/components/PageEdit.vue'
 import PageNav from '@theme/components/PageNav.vue'
 import JoinCommunity from './JoinCommunity'
+import OnlineChat from './OnlineChat.vue'
 
 export default {
-  components: { PageEdit, PageNav, JoinCommunity },
+  components: { PageEdit, PageNav, JoinCommunity, OnlineChat },
   props: ['sidebarItems'],
   data () {
     return {

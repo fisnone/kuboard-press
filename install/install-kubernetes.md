@@ -63,8 +63,8 @@ kubernetes 安装有多种选择，本文档描述的集群安装具备如下特
 * **在线答疑** 
 
   <Qq></Qq> 也可以扫描二维码加群
-  <p>
-    <img src="/images/kuboard_qq.png" alt="Kubernetes教程：QQ群在线答疑"/>
+  <p style="max-width: 160px;">
+    <img src="/images/kuboard_qq.png" style="padding: 10px;" alt="Kubernetes教程：QQ群在线答疑"/>
   </p>
 
 <!-- </div>
@@ -515,14 +515,14 @@ kubectl delete node demo-worker-x-x
 
 ## 安装 Ingress Controller
 
-> Ingress官方文档：https://kubernetes.io/docs/concepts/services-networking/ingress/
+<!-- > Ingress官方文档：https://kubernetes.io/docs/concepts/services-networking/ingress/
 >
-> Ingress Controllers官网介绍：https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+> Ingress Controllers介绍：https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
 >
 > 本文中使用如下部署方式：https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#using-a-self-provisioned-edge
 >
-> kubernetes支持多种Ingress Controllers (traefic / Kong / Istio / Nginx 等)，本文推荐使用 https://github.com/nginxinc/kubernetes-ingress
-
+> kubernetes支持多种Ingress Controllers (traefic / Kong / Istio / Nginx 等)，本文推荐使用 https://github.com/nginxinc/kubernetes-ingress -->
+kubernetes支持多种Ingress Controllers (traefic / Kong / Istio / Nginx 等)，本文推荐使用 https://github.com/nginxinc/kubernetes-ingress
 
 <b-card>
 <b-tabs content-class="mt-3">
@@ -585,7 +585,7 @@ kubectl apply -f https://kuboard.cn/install-script/v1.16.2/nginx-ingress.yaml
 <span v-on:click="$sendGaEvent('安装后求GitHub Star','安装后求GitHub Star','安装后求GitHub Star')"><a href="https://github.com/eip-work/kuboard-press" target="_blank">点击此处，给个GitHub Star</a></span>
 支持一下吧，<StarCount></StarCount>这么多人都 star 了呢，怎么能少得了您呢？
 
-[安装 Kuboard - 微服务管理界面](/install/install-dashboard.html)
+[安装 Kuboard - 微服务管理界面](/install/v3/install.html)
 
 [获取 Kubernetes 免费教程](/learning/)
 

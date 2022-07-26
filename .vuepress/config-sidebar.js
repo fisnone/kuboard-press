@@ -1,4 +1,4 @@
-module.exports = {
+let sidebar = {
   '/overview/': [
     {
       title: '简介',
@@ -33,23 +33,64 @@ module.exports = {
       title: '安装 Kubernetes',
       collapsable: false,
       children: [
-        'install-docker-desktop',
-        ['install-k8s', '安装Kubernetes单Master节点'],
-        'install-kubernetes',
-        'sealos/',
+        // 'install-docker-desktop',
+        ['install-k8s', '安装高可用的 Kubernetes 集群'],
+        // 'install-kubernetes',
         'install-node-port-range',
+        'docker-mirror',
         'k8s-restart',
       ]
     },
     {
-      title: '管理 Kubernetes',
+      title: '安装 Kubernetes 管理工具',
       collapsable: false,
       children: [
+        {
+          title: '安装 Kuboard v3',
+          collapsable: true,
+          children: [
+            'v3/install',
+            'v3/install-built-in',
+            'v3/install-gitlab',
+            'v3/install-github',
+            'v3/install-ldap',
+            'v3/install-in-k8s',
+            'v3/install-ha',
+          ]
+        },
+        {
+          title: '配置 Kuboard v3',
+          collapsable: true,
+          children: [
+            'v3/mfa',
+            'v3/reset-password',
+            'v3/proxy',
+            'v3/tls',
+            'v3/auth-user-sso',
+            'v3-upgrade',
+          ]
+        },
         'install-dashboard',
         'install-dashboard-offline',
-        'install-dashboard-upgrade',
-        'install-kubectl',
-        'config-kubectl',
+        {
+          title: '配置 Kuboard v2',
+          collapsable: true,
+          children: [
+            // 'install-dashboard-upgrade',
+            'reverse-proxy',
+            'install-kuboard-layout',
+            'install-kuboard-env-2',
+          ]
+        },
+        {
+          title: 'kubectl',
+          collapsable: true,
+          children: [
+            'install-kubectl',
+            'config-kubectl',
+            'install-kubectl-sa',
+          ]
+        },
         'install-k8s-dashboard',
       ]
     },
@@ -173,6 +214,7 @@ module.exports = {
                 'k8s-intermediate/workload/wl-deployment/pause',
                 'k8s-intermediate/workload/wl-deployment/status',
                 'k8s-intermediate/workload/wl-deployment/cleanup',
+                'k8s-intermediate/workload/wl-deployment/strategy',
                 'k8s-intermediate/workload/wl-deployment/canary',
               ]
             },
@@ -262,6 +304,8 @@ module.exports = {
             'k8s-intermediate/persistent/volume-mount-point.html',
             'k8s-intermediate/persistent/pv',
             'k8s-intermediate/persistent/storage-class',
+            'k8s-intermediate/persistent/ceph/k8s-config',
+            'k8s-intermediate/persistent/ceph/rook-config',
             'k8s-intermediate/persistent/nfs',
             'k8s-intermediate/persistent/limits',
           ]
@@ -274,6 +318,7 @@ module.exports = {
             'k8s-intermediate/config/config-map',
             'k8s-intermediate/config/computing-resource',
             'k8s-intermediate/config/assign-pod-node',
+            'k8s-intermediate/config/affinity',
             {
               title: '污点和容忍',
               collapsable: true,
@@ -328,11 +373,61 @@ module.exports = {
       collapsable: true,
       children: [
         {
+          title: '安全',
+          collapsable: true,
+          children: [
+            'k8s-advanced/sec/overview',
+            'k8s-advanced/sec/pss',
+            'k8s-advanced/sec/psa',
+            {
+              title: '认证及授权',
+              collapsable: true,
+              children: [
+                {
+                  title: '用户认证',
+                  collapsable: true,
+                  children: [
+                    'k8s-advanced/sec/authenticate/',
+                    'k8s-advanced/sec/sa-admin',
+                    // 'k8s-advanced/sec/authenticate/install',
+                    // 'k8s-advanced/sec/authenticate/ldap',
+                  ]
+                }, {
+                  title: '用户授权',
+                  collapsable: true,
+                  children: [
+                    // 'k8s-advanced/sec/kuboard',
+                    'k8s-advanced/sec/rbac/auth-namespace.html',
+                    // 'k8s-advanced/sec/rbac/list-namespace.html',
+                    // 'k8s-advanced/sec/rbac/logs.html',
+                    'k8s-advanced/sec/rbac/api',
+                    'k8s-advanced/sec/rbac/default',
+                    'k8s-advanced/sec/rbac/escalation',
+                    'k8s-advanced/sec/rbac/cmd',
+                    'k8s-advanced/sec/rbac/sa',
+                    'k8s-advanced/sec/rbac/permissive',
+                    'k8s-advanced/sec/rbac/example',
+                  ]
+                },
+              ]
+            },
+          ],
+        },
+        {
           title: '问题诊断',
           collapsable: true,
           children: [
             'k8s-advanced/ts/application',
             'k8s-advanced/ts/cluster',
+            'k8s-advanced/ts/deployment',
+            {
+              title: 'KuboardProxy',
+              collapsable: true,
+              children: [
+                'k8s-advanced/proxy/',
+                'k8s-advanced/proxy/rebase',
+              ]
+            }
           ]
         },
         {
@@ -343,21 +438,22 @@ module.exports = {
             'k8s-advanced/logs/basic',
             'k8s-advanced/logs/node',
             'k8s-advanced/logs/cluster',
-          ]
-        },
-        {
-          title: '调度',
-          collapsable: true,
-          children: [
-            'k8s-advanced/schedule/',
-            'k8s-advanced/schedule/tuning',
-            'k8s-advanced/schedule/framework',
+            'k8s-advanced/logs/loki-addon'
           ]
         },
         {
           title: '策略',
           collapsable: true,
           children: [
+            {
+              title: '调度',
+              collapsable: true,
+              children: [
+                'k8s-advanced/schedule/',
+                'k8s-advanced/schedule/tuning',
+                'k8s-advanced/schedule/framework',
+              ]
+            },
             {
               title: 'Limit Range',
               collapsable: true,
@@ -392,10 +488,27 @@ module.exports = {
         },
         'k8s-advanced/gc',
         {
+          title: '自动伸缩',
+          collapsable: true,
+          children: [
+            'k8s-advanced/hpa/hpa',
+            'k8s-advanced/hpa/walkthrough',
+          ]
+        },
+        {
+          title: '监控及告警',
+          collapsable: true,
+          children: [
+            'k8s-advanced/observe/monitor.html',
+            'k8s-advanced/observe/alert.html',
+            'k8s-advanced/observe/alert-dingtalk.html',
+          ]
+        },
+        {
           title: '扩展Kubernetes',
           collapsable: true,
           children: [
-            'k8s-advanced/extend/aggregation',
+            'k8s-advanced/extend/aggregation.html',
           ]
         },
       ]
@@ -405,9 +518,11 @@ module.exports = {
       collapsable: true,
       children: [
         {
-          title: '练习',
+          title: '实战',
           collapsable: true,
           children: [
+            'k8s-practice/import/import',
+            'k8s-practice/gpu/gpu',
             'k8s-practice/access/port-forward',
             'k8s-practice/admin/list-images',
           ]
@@ -429,6 +544,87 @@ module.exports = {
           ]
         },
         {
+          title: 'Spring Blade',
+          collapsable: true,
+          children: [
+            ['k8s-practice/spring-blade/', '介绍'],
+            {
+              title: '环境准备',
+              // collapsable: true,
+              path: '/learning/k8s-practice/spring-blade/prepare/prepare',
+              // children: [
+              //   'k8s-practice/spring-blade/prepare/prepare',
+              //   'k8s-practice/spring-blade/prepare/build'
+              // ]
+            },
+            {
+              title: '部署',
+              collapsable: true,
+              path: '/learning/k8s-practice/spring-blade/deploy/',
+              children: [
+                'k8s-practice/spring-blade/deploy/',
+                {
+                  title: '部署 Nacos',
+                  collapsable: true,
+                  path: '/learning/k8s-practice/spring-blade/deploy/nacos',
+                  children: [
+                    'k8s-practice/spring-blade/deploy/nacos',
+                    'k8s-practice/spring-blade/deploy/nacos-mysql',
+                    'k8s-practice/spring-blade/deploy/nacos-install',
+                    'k8s-practice/spring-blade/deploy/nacos-config',
+                  ]
+                },
+                {
+                  title: '部署其他基础软件',
+                  collapsable: true,
+                  path: '/learning/k8s-practice/spring-blade/deploy/m',
+                  children: [
+                    'k8s-practice/spring-blade/deploy/m',
+                    'k8s-practice/spring-blade/deploy/m-redis',
+                    'k8s-practice/spring-blade/deploy/m-sentinel',
+                    'k8s-practice/spring-blade/deploy/m-saber-db',
+                    'k8s-practice/spring-blade/deploy/m-gateway',
+                    'k8s-practice/spring-blade/deploy/m-swagger',
+                  ]
+                },
+                {
+                  title: '部署微服务层',
+                  collapsable: true,
+                  path: '/learning/k8s-practice/spring-blade/deploy/blade-svc',
+                  children: [
+                    'k8s-practice/spring-blade/deploy/blade-svc',
+                    'k8s-practice/spring-blade/deploy/blade-admin',
+                    'k8s-practice/spring-blade/deploy/blade-others',
+                  ]
+                },
+                'k8s-practice/spring-blade/deploy/saber-web',
+                'k8s-practice/spring-blade/deploy/validate',
+              ],
+            },
+            {
+              title: '导入导出',
+              collapsable: true,
+              path: '/learning/k8s-practice/spring-blade/import/index',
+              children: [
+                'k8s-practice/spring-blade/import/',
+                'k8s-practice/spring-blade/import/export',
+                'k8s-practice/spring-blade/import/import',
+              ]
+            },
+            {
+              title: '监控及日志',
+              collapsable: true,
+              path: '/learning/k8s-practice/spring-blade/monitor/',
+              children: [
+                'k8s-practice/spring-blade/monitor/',
+                'k8s-practice/spring-blade/monitor/monitor',
+                'k8s-practice/spring-blade/monitor/logs'
+              ]
+            },
+
+          ]
+        },
+        {
           title: 'Open Capacity Platform',
           collapsable: true,
           children: [
@@ -437,7 +633,7 @@ module.exports = {
               collapsable: false,
               path: '/learning/k8s-practice/ocp/',
               children: [
-                ['k8s-practice/ocp/', 'OCP介绍'],
+                ['k8s-practice/ocp/', 'OCP 介绍'],
                 'k8s-practice/ocp/prepare',
                 'k8s-practice/ocp/build',
               ]
@@ -469,15 +665,17 @@ module.exports = {
             },
           ]
         },
-        // {
-        //   title: '部署LNMP应用',
-        //   collapsable: true,
-        //   children: [
-        //     '/learning/k8s-practice/lnmp/wordpress'
-        //   ]
-        // }
       ]
-    }
+    },
+    {
+      title: 'Kubernetes 常见问题',
+      collapsable: true,
+      children: [
+        'faq/ping-service',
+        'faq/request-limit',
+        'faq/image-pull-backoff'
+      ]
+    },
   ],
 
   '/guide/': [
@@ -490,11 +688,11 @@ module.exports = {
     },
     {
       title: 'Example',
-      collapsable: false,
+      collapsable: true,
       children: [
         'example/busybox',
         'example/import',
-        'example/monitor',
+        'example/monitor-v2',
       ]
     },
     {
@@ -524,7 +722,25 @@ module.exports = {
       children: [
         'diagonize/events',
         'diagonize/logs',
-        'diagonize/port-forward'
+        'diagonize/port-forward',
+        'diagonize/skills',
+      ]
+    },
+    {
+      title: 'Kuboard Proxy',
+      collapsable: false,
+      children: [
+        ['proxy/', 'Kuboard Proxy 介绍'],
+        ['proxy/authorization', '授权用户访问 Kuboard Proxy'],
+        ['proxy/rebase', '为何极少部分网页显示不正常-Rebase'],
+        ['proxy/auth-proxy', '使用Auth-Proxy实现单点登录']
+      ]
+    },
+    {
+      title: 'CI/CD集成',
+      collapsable: false,
+      children: [
+        'cicd/'
       ]
     },
     {
@@ -533,6 +749,7 @@ module.exports = {
       children: [
         'addon/',
         'addon/customize',
+        'addon/api',
         'addon/repository'
       ]
     },
@@ -543,13 +760,6 @@ module.exports = {
         'monitor/',
       ]
     },
-    {
-      title: 'CI/CD集成',
-      collapsable: false,
-      children: [
-        'cicd/'
-      ]
-    }
   ],
 
   '/t/': [
@@ -568,15 +778,30 @@ module.exports = {
       collapsable: false,
       children: [
         '',
+        'kuboard-spray/'
       ]
     },
     {
       title: '更新说明',
       collapsable: false,
       children: [
+        'change-log/v3.0.x',
+        'change-log/v2.0.x',
         'change-log/v1.0.x',
+        'change-log/upgrade-2-3',
+        'change-log/upgrade-1-2',
+        // 'change-log/upgrade-2-from-beta',
+        // 'known-issue',
       ]
     }
   ],
 
 }
+
+if (process.env.NODE_ENV === 'development') {
+  let guideV2 = require('./config-sidebar-guide.js')
+  
+  sidebar = Object.assign(sidebar, guideV2)
+}
+
+module.exports = sidebar

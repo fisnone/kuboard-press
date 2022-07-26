@@ -3,16 +3,19 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import 'vue2-animate/dist/vue2-animate.min.css';
 
-
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import BootstrapVue from 'bootstrap-vue'
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
 import Container from './grid/Container'
 import Grid from './grid/Grid'
 import GridItem from './grid/GridItem'
 import defaults from './grid/utils/defaults'
+
+import Comp from './comp/index'
+import Cookies from 'js-cookie'
+import VueClipboard from 'vue-clipboard2'
 
 const VueFractionGrid = {
   install (Vue, options) {
@@ -29,8 +32,10 @@ export default ({
   router, // 当前应用的路由实例
   siteData // 站点元数据
 }) => {
-  
+  Vue.prototype.$ELEMENT = { size: 'mini', zIndex: 3000 }
+  Vue.use(VueClipboard)
   Vue.use(BootstrapVue)
+  Vue.use(BootstrapVueIcons)
   Vue.use(VueFractionGrid, {
     approach: 'desktop-first',
     gutter: '1rem',
@@ -39,6 +44,7 @@ export default ({
       tablet: '719px 959px'
     }
   })
+  Vue.use(Comp)
   Vue.prototype.$sendGaEvent = function (category, action, label) {
     let e = {
       hitType: 'event',
@@ -83,8 +89,41 @@ export default ({
         duration: 1200
       });
     }, 200)
+
+    let TOKEN_KEY = 'kb-user-center-token'
+
+    let domain = window.location.hostname
+    if (domain.indexOf('kuboard.cn') >= 0) {
+      domain = 'kuboard.cn'
+    }
+    window.KbUcloginStatus = {
+      status: Cookies.get(TOKEN_KEY) !== null && Cookies.get(TOKEN_KEY) !== undefined,
+      user: undefined
+    }
+    Vue.prototype.$login = function (token) {
+      // axios.defaults.headers.common['Authorization'] = token;
+      // localStorage.setItem(TOKEN_KEY, token)
+      Cookies.set(TOKEN_KEY, token, { domain: domain, expires: 7, path: '/' })
+      window.KbUcloginStatus.status = true
+    }
+    
+    Vue.prototype.$logout = function () {
+      window.KbUcloginStatus.status = false
+      // localStorage.removeItem(TOKEN_KEY)
+      Cookies.remove(TOKEN_KEY, { domain: domain, expires: 7, path: '/' })
+      // delete (axios.defaults.headers.common['Authorization'])
+    }
   }
-  console.log('sharing', sharing)
+  // console.log('sharing', sharing)
   Vue.prototype.$isSharing = sharing
+
+  Vue.prototype.$openUrlInBlank = function (url) {
+    let a = document.createElement('a')
+    document.body.appendChild(a)
+    a.setAttribute('href', url)
+    a.setAttribute('target', '_blank')
+    a.click()
+    document.body.removeChild(a)
+  }
 
 }

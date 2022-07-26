@@ -11,7 +11,7 @@ meta:
 
 <AdSenseTitle/>
 
-参考文档： Kubernetes 官网 [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
+参考文档： Kubernetes  [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
 
 ## 概述
 
@@ -41,7 +41,7 @@ nodeName 是四种方法中最简单的一个，但是因为它的局限性，�
 
 您在 Kuboard 工作负载编辑器中，可以通过 ***指定节点*** --> ***选择节点*** 按钮，选择对应 nodeName 的取值。如下图所示：
 
-![Kubernetes教程：将容器调度到指定节点-选择节点](./assign-pod-node.assets/image-20190908141039251.png)
+![Kubernetes教程：将容器调度到指定节点-选择节点](./assign-pod-node.assets/image-20210404213023202.png)
 
 ## 节点选择器 nodeSelector
 
@@ -57,7 +57,7 @@ nodeSelector 是 PodSpec 中的一个字段。指定了一组名值对。节点�
 
   增加标签 disk:ssd，并保存，如下图所示：
 
-  ![Kubernetes教程：将容器调度到指定节点-为节点增加标签](./assign-pod-node.assets/image-20190908152121423.png)
+  ![Kubernetes教程：将容器调度到指定节点-为节点增加标签](./assign-pod-node.assets/image-20210404213139950.png)
 
 ### 为工作负载选择节点
 
@@ -65,22 +65,22 @@ nodeSelector 是 PodSpec 中的一个字段。指定了一组名值对。节点�
 
 * 点击您要编辑的工作负载，进入工作负载查看页
 
-* 点击 ***编辑*** 按钮，进入工作负载编辑页
+* 点击 ***编辑*** 按钮，进入工作负载编辑页，并切换到 ***高级设置*** 标签
 
-* 点击 **节点选择** --> **匹配节点** --> **选择标签** 按钮
+* 点击 **节点选择** --> **根据标签选择节点** --> **选择标签** 按钮
 
-  选择 disk:ssd 标签，此时可以看到匹配的节点有刚才您添加标签的节点。点击 ***确定*** 按钮
+  选择 `disk:ssd` 标签，此时可以看到匹配的节点有刚才您添加标签的节点。点击 ***确定*** 按钮
 
-  ![Kubernetes教程：将容器调度到指定节点-选择标签](./assign-pod-node.assets/image-20190908152640876.png)
+  ![Kubernetes教程：将容器调度到指定节点-选择标签](./assign-pod-node.assets/image-20210404214602430.png)
 
 * 点击 ***保存*** 按钮
 
   此时您已完成了通过 nodeSelector 为 Pod 指定节点的任务。
 
-## Node isolation/restriction <Badge text="Kuboard 暂不支持" type="warn"/>
+## Node isolation/restriction
 
-请参考 Kubernetes 官网文档 [Node isolation/restriction](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-isolation-restriction)
+向节点对象添加标签后，可以将 Pod 指定到特定（一个或一组）的节点，以便确保某些 Pod 只在具备某些隔离性、安全性或符合管理规定的节点上运行。如果将标签用于这个目的，推荐选择那些不会被 kubelet 修改的标签。这样做可以避免节点非法使用其 kubelet credential 来设置节点自己的标签，进一步影响到调度器将工作负载调度到该节点上。
 
-## Affinity and anti-affinity <Badge text="Kuboard 暂不支持" type="warn"/>
-
-请参考 Kubernetes 官网文档 [Affinity and anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
+`NodeRestriction` 管理插件可以阻止 kubelet 设置或者修改节点上以 `node-restriction.kubernetes.io/` 开头的标签。如需要使用该标签前缀作为节点隔离的目的，需要：
+1. 确保 kubenetes 已经启用了 [Node authorizer](https://kubernetes.io/docs/reference/access-authn-authz/node/) 和 [NodeRestriction admission plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
+2. 添加带 `node-restriction.kubernetes.io/` 前缀的标签到节点对象，并将这些标签作为 Pod 中的节点选择器。例如： `example.com.node-restriction.kubernetes.io/fips=true` 或 `example.com.node-restriction.kubernetes.io/pci-dss=true`。

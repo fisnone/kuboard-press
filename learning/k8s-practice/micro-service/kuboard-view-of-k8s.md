@@ -51,7 +51,7 @@ Kuboard 在落地 Spring Cloud 微服务的过程中，设计了如下图所示�
 
   | 参与方     | 渠道       | 展现层项目       |
   | ---------- | ---------- | ---------------- |
-  | 散客 | PC浏览器   | 官网       |
+  | 散客 | PC浏览器   |        |
   |            | 移动站     | 移动站     |
   |            | 微信小程序 | 微信小程序 |
   |            | App        | APP        |
@@ -188,7 +188,7 @@ Kuboard 认为，掌握这些概念并正确理解这些概念的关系之后，
 
 * 资源层监控：Prometheus + Grafana + Node Exporter 等组件，监控Kubernetes 节点的 CPU、内存、网络、磁盘等使用情况
 * 中间件层监控：Prometheus + Grafana + MySQL Exporter + Nginx Exporter + JVM Exporter 等，监控 MySQL、Nginx、JVM 等中间件的使用情况
-* 链路/APM监控：Pinpoint / SkyWorking 等监控工具，监控应用程序的性能表现
+* 链路/APM监控：Pinpoint / Skywalking 等监控工具，监控应用程序的性能表现
 
 各种监控系统各有侧重，如果想要取得比较好的监控效果，必须克服如下几个困难：
 
@@ -199,9 +199,8 @@ Kuboard 认为，应该以微服务视角快速查看到该微服务在不同层
 
 ![Kubernetes教程：Kuboard监控](./kuboard-view-of-k8s.assets/image-20190809220543742.png)
 
-点击图中 ***Nginx 监控***、 ***容器组监控***、 ***所在节点监控*** 等按钮，可以直接打开该容器组对应的监控界面。因为篇幅的限制，此处不再展开描述，请点击 <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
-  Kuboard 在线体验
-</a> 查看具体的监控效果。
+点击图中 ***Nginx 监控***、 ***容器组监控***、 ***所在节点监控*** 等按钮，可以直接打开该容器组对应的监控界面。因为篇幅的限制，此处不再展开描述，请点击  <KuboardDemo suffix="install" label="在线体验 Kuboard" color="#007af5"/>
+ 查看具体的监控效果。
 
 
 
